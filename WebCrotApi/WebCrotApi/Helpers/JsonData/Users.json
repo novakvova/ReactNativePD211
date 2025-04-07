@@ -1,0 +1,32 @@
+[
+    {
+        "UserName": "ivan_petrov",
+        "Email": "ivan@example.com",
+        "PhoneNumber": "+380671234567",
+        "Image": "https://www.dnipro.libr.dp.ua/upload/images/Comp/1Sirko.jpg",
+        "LastName": "Петров",
+        "FirstName": "Іван",
+        "Role": "Admin",
+        "Password": "Qwerty1-"
+    },
+    {
+        "UserName": "olga_sidorova",
+        "Email": "olga@example.com",
+        "PhoneNumber": "+380981234567",
+        "Image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT_DOK0RxAAjagOMMS2A7ZQRnFCA6O18Jx_w&s",
+        "LastName": "Сидорова",
+        "FirstName": "Ольга",
+        "Role": "Admin",
+        "Password": "Qwerty1-"
+    },
+    {
+        "UserName": "serhiy_kovalenko",
+        "Email": "serhiy@example.com",
+        "PhoneNumber": "+380931234567",
+        "Image": "https://t3.ftcdn.net/jpg/05/25/54/18/360_F_525541800_8GFedl5N5x0UipnSJRl3XMVa21uhesfJ.jpg",
+        "LastName": "Коваленко",
+        "FirstName": "Сергій",
+        "Role": "User",
+        "Password": "123456"
+    }
+]
