@@ -65,5 +65,17 @@ import "../global.css"
 ## Clear cache
 ```
 npm start -- --reset-cache
+npx expo start --clear
+```
+
+## Add Query Login
+```
+npm i react-redux
+npm i @reduxjs/toolkit
+npm i jwt-decode
+
+npm install react-native-dotenv
+
+npx expo install expo-secure-store
 ```
 

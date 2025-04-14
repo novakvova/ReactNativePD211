@@ -1,0 +1,1 @@
+export const BASE_URL = "https://pd211api.itstep.click";
