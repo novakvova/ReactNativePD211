@@ -15,12 +15,21 @@ import FormField from "@/components/FormField";
 import {useLoginMutation} from "@/serices/accountService";
 import {jwtParse} from "@/utils/jwtParser";
 import LoadingOverlay from "@/components/LoadingOverlay";
+import {useAppDispatch} from "@/store";
+import {saveToSecureStore} from "@/utils/secureStore";
+import {setCredentials} from "@/store/slices/userSlice";
+import {IUser} from "@/interfaces/account";
+import {useRouter} from "expo-router";
 
 const LoginScreen = () => {
+
+    const router = useRouter(); // Ініціалізуємо роутер
 
     const [form, setForm] = useState({email: "", password: ""});
 
     const [login, {isLoading, error}] = useLoginMutation();
+
+    const dispatch = useAppDispatch(); // Використовуємо dispatch з Redux
 
     const handleChange = (field: string, value: string) => {
         setForm({...form, [field]: value});
@@ -30,9 +39,12 @@ const LoginScreen = () => {
         try {
             //Очікує завершення результату від сервера
             const data = await login(form).unwrap();
-            const userInfo = jwtParse(data.token);
-            console.log("User info", userInfo);
-            console.log("Login data", data);
+
+            await saveToSecureStore('authToken', data.token)
+            dispatch(setCredentials({ user: jwtParse(data.token) as IUser, token: data.token }));
+
+            // Перенаправляємо користувача на сторінку профілю
+            router.replace("/profile");
         }
         catch {
             console.log("Login error");
