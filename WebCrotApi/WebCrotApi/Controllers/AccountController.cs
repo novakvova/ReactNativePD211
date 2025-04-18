@@ -1,17 +1,20 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebCrotApi.Abstract;
+using WebCrotApi.Constants;
 using WebCrotApi.Data.Entities.Identity;
 using WebCrotApi.Models.Account;
 
 namespace WebCrotApi.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 [ApiController]
 public class AccountController(UserManager<UserEntity> userManager,
-    IJwtTokenService jwtTokenService) : ControllerBase
+    IJwtTokenService jwtTokenService, IMapper mapper, 
+    IImageService imageService) : ControllerBase
 {
-    [HttpPost("login")]
+    [HttpPost]
     public async Task<IActionResult> Login([FromBody] LoginViewModel model)
     {
         try
@@ -27,6 +30,26 @@ public class AccountController(UserManager<UserEntity> userManager,
         catch (Exception ex)
         {
             return BadRequest(new { error = ex.Message });
+        }
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Register([FromForm] RegisterViewModel model)
+    {
+        var user = mapper.Map<UserEntity>(model);
+        user.Image = await imageService.SaveImageAsync(model.Iamge);
+
+        var result = await userManager.CreateAsync(user, model.Password);
+
+        if (result.Succeeded)
+        {
+            result = await userManager.AddToRoleAsync(user, Roles.User);
+            var token = await jwtTokenService.CreateTokenAsync(user);
+            return Ok(new { token });
+        }
+        else
+        {
+            return BadRequest(new { errors = result.Errors});
         }
     }
 }
