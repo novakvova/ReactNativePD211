@@ -37,7 +37,7 @@ public class AccountController(UserManager<UserEntity> userManager,
     public async Task<IActionResult> Register([FromForm] RegisterViewModel model)
     {
         var user = mapper.Map<UserEntity>(model);
-        user.Image = await imageService.SaveImageAsync(model.Iamge);
+        user.Image = await imageService.SaveImageAsync(model.Image);
 
         var result = await userManager.CreateAsync(user, model.Password);
 
