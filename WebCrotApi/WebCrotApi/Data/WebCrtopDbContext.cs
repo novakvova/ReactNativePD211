@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using WebCrotApi.Data.Entities;
 using WebCrotApi.Data.Entities.Identity;
 
 namespace WebCrotApi.Data;
@@ -8,6 +9,8 @@ public class WebCrtopDbContext : IdentityDbContext<UserEntity, RoleEntity, long>
 {
     public WebCrtopDbContext(DbContextOptions<WebCrtopDbContext> options)
         : base(options) { }
+
+    public DbSet<CategoryEntity> Categories { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

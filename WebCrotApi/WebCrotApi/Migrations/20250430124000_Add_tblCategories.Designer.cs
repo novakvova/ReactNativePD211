@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WebCrotApi.Data;
@@ -11,9 +12,11 @@ using WebCrotApi.Data;
 namespace WebCrotApi.Migrations
 {
     [DbContext(typeof(WebCrtopDbContext))]
-    partial class WebCrtopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250430124000_Add_tblCategories")]
+    partial class Add_tblCategories
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

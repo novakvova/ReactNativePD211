@@ -12,5 +12,6 @@ namespace WebCrotApi.Data.Entities.Identity
         [StringLength(100)]
         public string? Firstname { get; set; }
         public virtual ICollection<UserRoleEntity>? UserRoles { get; set; }
+        public virtual ICollection<CategoryEntity>? Categories { get; set; }
     }
 }
