@@ -26,25 +26,12 @@ export default function TabLayout() {
                     default: {},
                 }),
             }}>
-            <Tabs.Screen
-                name="index"
-                options={{
-                    href: null
-                }}
-            />
 
             <Tabs.Screen
-                name="login"
+                name="profile"
                 options={{
-                    title: 'Вхід',
-                    tabBarIcon: ({color}) => <IconSymbol size={28} name="house.fill" color={color}/>,
-                }}
-            />
-            <Tabs.Screen
-                name="register"
-                options={{
-                    title: 'Реєстрація',
-                    tabBarIcon: ({color}) => <IconSymbol size={28} name="paperplane.fill" color={color}/>,
+                    title: 'Профіль',
+                    tabBarIcon: ({color}) => <IconSymbol size={28} name="person.crop.circle" color={color}/>,
                 }}
             />
         </Tabs>
