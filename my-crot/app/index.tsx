@@ -29,7 +29,7 @@ const Welcome = () => {
         getValueForSecureStore('authToken')
             .then((res) => {
                 if (res) {
-                    console.log("Result secure", res);
+                    //console.log("Result secure", res);
                     dispatch(setCredentials({ user: jwtParse(res) as IUser, token: res }))
                     router.replace('/profile')
                 }
