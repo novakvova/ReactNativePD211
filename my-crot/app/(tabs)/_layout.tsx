@@ -14,34 +14,55 @@ export default function TabLayout() {
     return (
         <Tabs
             screenOptions={{
-                tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
                 headerShown: false,
+                tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+                tabBarInactiveTintColor: '#A0A0A0',
+                tabBarShowLabel: true,
+                tabBarLabelStyle: {
+                    fontSize: 12,
+                    fontWeight: '600',
+                    marginBottom: 4,
+                },
+                tabBarIconStyle: {
+                    marginTop: 6,
+                },
                 tabBarButton: HapticTab,
                 tabBarBackground: TabBarBackground,
                 tabBarStyle: Platform.select({
                     ios: {
-                        // Use a transparent background on iOS to show the blur effect
                         position: 'absolute',
+                        borderTopLeftRadius: 20,
+                        borderTopRightRadius: 20,
+                        height: 70,
+                        backgroundColor: 'rgba(255, 255, 255, 0.9)',
                     },
-                    default: {},
+                    android: {
+                        elevation: 5,
+                        height: 65,
+                        backgroundColor: '#fff',
+                    },
                 }),
-            }}>
-
+            }}
+        >
             <Tabs.Screen
                 name="profile"
                 options={{
                     title: 'Профіль',
-                    tabBarIcon: ({color}) => <IconSymbol size={28} name="person.crop.circle" color={color}/>,
+                    tabBarIcon: ({ color }) => (
+                        <IconSymbol size={28} name="person.crop.circle" color={color} />
+                    ),
                 }}
             />
-
             <Tabs.Screen
                 name="categories"
                 options={{
                     title: 'Категорії',
-                    tabBarIcon: ({color}) => <IconSymbol size={28} name="category.fill" color={color}/>,
+                    tabBarIcon: ({ color }) => (
+                        <IconSymbol size={28} name="category.fill" color={color} />
+                    ),
                 }}
             />
         </Tabs>
+
     );
 }
