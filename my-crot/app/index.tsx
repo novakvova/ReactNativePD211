@@ -26,19 +26,19 @@ const Welcome = () => {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        getValueForSecureStore('authToken')
-            .then((res) => {
-                if (res) {
-                    //console.log("Result secure", res);
-                    dispatch(setCredentials({ user: jwtParse(res) as IUser, token: res }))
-                    router.replace('/profile')
-                }
-                setIsLoading(false);
-            })
-            .catch((error) => {
-                console.log(error)
-                setIsLoading(false);
-            })
+        const checkAuth = async () => {
+            const token = await  getValueForSecureStore("authToken");
+            if(token) {
+                dispatch(setCredentials({ user: jwtParse(token) as IUser, token }))
+                router.replace('/profile');
+            }
+            else {
+                router.replace('/login');
+            }
+            setIsLoading(false);
+        }
+        checkAuth();
+
     }, [])
 
     if(isLoading) {
