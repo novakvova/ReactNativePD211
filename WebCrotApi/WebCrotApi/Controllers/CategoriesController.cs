@@ -59,11 +59,11 @@ public class CategoriesController(IMapper mapper,
     public async Task<IActionResult> Edit([FromForm] CategoryEditViewModel model)
     {
         var category = context.Categories.SingleOrDefault(x => x.Id == model.Id);
-        if(category == null)
+        if (category == null)
             return NotFound();
-        
+
         category = mapper.Map(model, category); // змінює існуючий об'єкт, а не створює новий
-        if(model.Image!=null)
+        if (model.Image != null)
         {
             string deleteImage = category.Image;
             category.Image = await imageService.SaveImageAsync(model.Image);
@@ -72,6 +72,23 @@ public class CategoriesController(IMapper mapper,
 
         context.SaveChanges();
         return Ok(new { id = category.Id });
+    }
+
+    [HttpDelete("{id}")]
+    public IActionResult Remove(int id)
+    {
+        var category = context.Categories.SingleOrDefault(x => x.Id == id);
+        if (category == null)
+            return NotFound();
+
+        if (category.Image != null)
+        {
+            imageService.DeleteImageIfExists(category.Image);
+        }
+
+        context.Categories.Remove(category);
+        context.SaveChanges();
+        return Ok();
     }
 
 }
